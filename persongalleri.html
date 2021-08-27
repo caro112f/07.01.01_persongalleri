@@ -22,7 +22,7 @@
     </style>
   </head>
   <body>
-    <section></section>
+    <section class="container"></section>
     <template>
       <article>
         <img class="billede" src="" alt="" />
@@ -37,23 +37,28 @@
     </template>
 
     <script>
-      const url = "https://persongalleri-5d3e.restdb.io/rest/persongalleri";
-      let container = document.querySelector("section");
-      let temp = document.querySelector("template");
+      window.addEventListener("DOMContentLoaded", start);
+      function start() {
+        const url = "https://persongalleri-5d3e.restdb.io/rest/persongalleri";
+        hentData(url);
+      }
+
+      const container = document.querySelector(".container");
+      const temp = document.querySelector("template");
 
       const options = {
         headers: {
           "x-apikey": "600fe9211346a1524ff12e31",
         },
       };
-      async function hentData() {
+      async function hentData(url) {
         const respons = await fetch(url, options);
         const json = await respons.json();
         console.log(json);
         vis(json);
       }
-      function vis(json) {
-        json.array.forEach((person) => {
+      function vis(personer) {
+        personer.forEach((person) => {
           let klon = temp.cloneNode(true).content;
           klon.querySelector(".billede").src = "faces/" + person.billede;
           klon.querySelector(".efternavn").textContent = person.efternavn;
@@ -66,7 +71,7 @@
           container.appendChild(klon);
         });
       }
-      hentData();
+      hentData(url);
     </script>
   </body>
 </html>
