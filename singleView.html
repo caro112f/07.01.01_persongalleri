@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>01_troende</title>
+    <title>loop/single view</title>
     <style>
       section {
         display: grid;
@@ -91,9 +91,15 @@
             klon.querySelector(".hobby").textContent = person.hobby;
             klon.querySelector(".fødselsdag").textContent = person.fødselsdag;
             klon.querySelector(".troende").textContent = person.troende;
+            klon
+              .querySelector("article")
+              .addEventListener("click", visDetaljer);
             container.appendChild(klon);
           }
         });
+      }
+      function visDetaljer(hvem) {
+        location.href = `02_detaljer.html?id=${hvem._id}`;
       }
     </script>
   </body>
