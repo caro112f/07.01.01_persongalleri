@@ -28,8 +28,9 @@
         overflow: scroll;
       }
       #article_popup {
-        width: 80vw;
         display: flex;
+        max-width: 80vw;
+        height: auto;
         margin: 4rem auto;
         padding: 12px;
         border-radius: 25px;
@@ -48,7 +49,7 @@
       button:hover {
         background-color: hotpink;
       }
-      .luk {
+      #luk {
         position: fixed;
         padding: 1em;
         font-size: 1.7em;
@@ -81,12 +82,15 @@
     </template>
 
     <section id="popup" class="hide">
-      <div class="luk"></div>
+      <div id="luk"><button>Luk</button></div>
       <article id="article_popup">
-        <h2 class="navn">Navn</h2>
-        <p class="fødselsdag">Fødselsdag</p>
-        <p class="email">Email</p>
-        <img src="" alt="" class="profil-billede" />
+        <h2></h2>
+        <img src="" alt="" />
+        <h3>Titel: <span class="titel"></span></h3>
+        <p>Email: <span class="email"></span></p>
+        <p>Fødselsdag: <span class="fdag"></span></p>
+        <p>Hobby: <span class="hobby"></span></p>
+        <p>Troende: <span class="tro"></span></p>
       </article>
     </section>
 
@@ -153,22 +157,21 @@
         });
       }
 
-      // function visDetaljer(hvem) {
-      //   location.href = `02_detaljer.html?id=${hvem._id}`;
-      // }
-      // function visPersoner(){
-      //   document.querySelector("h2").textContent= filter;
-      //   json.forEach((person) => {
-      //     if (filter == "alle" || filter == person.troende)
-      //     const klon = template.cloneNode(true);
-      //     klon.querySelector(".profil-billede").src = "faces/" + person.billede;
-      //     klon.querySelector(".navn").textContent = person.fornavn + " " + person.efternavn;
-      //     klon.querySelector("article").addEventListener("click", () => visDetaljer(person));
-      //   })
-      // }
-      // function visDetaljer(person){
-      //   console.log(person)
-      // }
+      function visDetaljer(person) {
+        console.log(person);
+        popup.style.display = "block";
+        popup.querySelector("img").src = "faces/" + person.billede;
+        popup.querySelector("h2").textContent =
+          person.fornavn + " " + person.efternavn;
+        popup.querySelector(".titel").textContent = person.titel;
+        popup.querySelector(".email").textContent = person.email;
+        popup.querySelector(".fdag").textContent = person.fødselsdag;
+        popup.querySelector(".hobby").textContent = person.hobby;
+        popup.querySelector(".tro").textContent = person.troende;
+      }
+      document
+        .querySelector("#luk")
+        .addEventListener("click", () => (popup.style.display = "none"));
     </script>
   </body>
 </html>
